@@ -1,18 +1,35 @@
-import React from 'react'
-import { 
+import React, { useState } from 'react'
+import {
     BrowserRouter as Router,
     Switch,
-    Route
- } from 'react-router-dom'
-import Login from '../components/Login'
-import Register from '../components/Register'
+    Route,
+    Redirect
+} from 'react-router-dom'
+import { AuthRouter } from './AuthRoute'
+import { MainRoute } from './MainRoute'
+import { PrivateRoute } from './PrivateRoute'
+import { PublicRoute } from './PublicRoute'
 
 const AppRouter = () => {
+    const [checking, setChecking] = useState(true)
+    const [isLooggedIn, setsIsLoogedIn] = useState(true)
+
     return (
         <Router>
             <Switch>
-                <Route exact path="/" component={Login} />
-                <Route exact path="/register" component={Register} />
+                <PublicRoute
+                    path="/auth"
+                    component={AuthRouter}
+                    isAuthenticated={isLooggedIn}
+                />
+
+                <PrivateRoute
+                path="/"
+                component={MainRoute}
+                isAuthenticated={isLooggedIn}
+                />
+
+                <Redirect to="/auth/login" />
             </Switch>
         </Router>
     )
