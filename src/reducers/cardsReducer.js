@@ -1,15 +1,19 @@
 import { types } from '../types/types'
 
 const initialState = {
-    cards: [],
-    active: null
+    active: {
+        title: '',
+        overview: ''
+    }
 }
 export const cardsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.cardAddNew:
+        case types.cardActive:
             return {
                 ...state,
-                card: [action.payload, ...state.card]
+                active: {
+                    ...action.payload
+                }
             }
 
         default:
