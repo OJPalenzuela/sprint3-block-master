@@ -1,4 +1,4 @@
-import { getByTitle } from "@testing-library/react"
+// import { getByTitle } from "@testing-library/react"
 import { types } from "../types/types"
 
 export const activeCard = (id,card) => {
