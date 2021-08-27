@@ -5,7 +5,7 @@ const FEATURED_API = `https://api.themoviedb.org/3/discover/movie?sort_by=popula
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=`
 
 export const getMovies = async (setMovies) =>{
-    const reponse = await fetch(FEATURED_API+2);
+    const reponse = await fetch(FEATURED_API + 2);
     const data = await reponse.json()
     const {results} = data
     setMovies(results)
