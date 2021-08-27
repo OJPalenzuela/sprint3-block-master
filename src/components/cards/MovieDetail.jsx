@@ -1,43 +1,47 @@
-import React from "react";
+import React, { memo } from "react";
 import { Fragment } from "react";
+import { useSelector } from "react-redux";
 
-const MovieDetail = ({poster}) => {
+const IMG_API = "https://image.tmdb.org/t/p/w500";
 
-    console.log(poster);
+
+const MovieDetail = memo(() => {
+
+    const {active} = useSelector(state => state.card);
 
   return (
     <Fragment>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-                <div class="container-fluid">
-                <img src={poster} alt="movie-poster" />
+            <div className="modal-body">
+                <div className="container-fluid">
+                <img src={IMG_API + active.poster_path} alt="movie-poster" />
                 </div>
             </div>
-            <div class="modal-footer">
+            <div className="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button type="button" class="btn btn-primary">
+              <button type="button" className="btn btn-primary">
                 Save changes
               </button>
             </div>
@@ -46,6 +50,6 @@ const MovieDetail = ({poster}) => {
       </div>
     </Fragment>
   );
-};
+});
 
 export default MovieDetail;

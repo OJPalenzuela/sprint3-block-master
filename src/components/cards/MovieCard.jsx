@@ -1,26 +1,25 @@
-import React, { Fragment, memo } from "react";
+import React from "react";
 import "../../style/styleMovieCard.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
 import MovieDetail from "./MovieDetail";
 
 const IMG_API = "https://image.tmdb.org/t/p/w500/";
 
-const MovieCard = ({ title, poster_path, vote_average }) => {
-
-    // console.log(poster_path);
+const MovieCard = ({ data, click }) => {
   return (
-    <Fragment>
-      
-
+    <div
+      className="card-movie"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      <div className="card-movie" onClick={() => click(data)}>
         <div className="rating">
           <i style={{ color: "#FED941" }} className="fas fa-star"></i>{" "}
-          {vote_average}
+          {data.vote_average}
         </div>
-        <img className="img-card" src={IMG_API + poster_path} alt="" />
-      
-    </Fragment>
+        <img className="img-card" src={IMG_API + data.poster_path} alt="" />
+      </div>
+      <MovieDetail data={data}/>
+    </div>
   );
 };
 
