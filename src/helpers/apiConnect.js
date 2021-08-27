@@ -9,5 +9,5 @@ export const getMovies = async (setMovies) =>{
     const data = await reponse.json()
     const {results} = data
     setMovies(results)
-    console.log(results)
+    // console.log(results)
 }

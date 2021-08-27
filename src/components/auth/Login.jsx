@@ -80,12 +80,12 @@ const Login = () => {
           onClick={handleLoginGoogle}>
           <div className="google-icon-wrapper d-flex align-items-center justify-content-center">
             <img className="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              src="https://upload.wikimedia.org/wikipedia/commons/9/91/036-facebook.png"
               alt="google button"
               width="30px" />
 
             <p className="btn-text m-1">
-              <b>Sign in with google</b>
+              <b>Sign in with Facebook</b>
             </p>
           </div>
         </Button>

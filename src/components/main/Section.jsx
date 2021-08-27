@@ -20,7 +20,7 @@ const Section = () => {
 
     const change = () => {
         setPages(pages + 1)
-        console.log(pages)
+        // console.log(pages)
     }
 
     const handleActive = (data) => {
