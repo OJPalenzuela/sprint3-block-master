@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import MovieCard from '../cards/MovieCard'
 import '../../style/styleSection.css'
-import { memo } from 'react'
 import { getMovies } from '../../helpers/apiConnect'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { activeCard } from '../../actions/cardActions'
+import { useDelete } from '../../hooks/useDelete'
 
-const exp = [
-    793002
-]
 
 const Section = () => {
 
@@ -27,19 +24,22 @@ const Section = () => {
     }
 
     const handleActive = (data) => {
-        console.log(data)
         dispatch(activeCard(data.id, data))
     }
 
+    const {active} = useSelector(state => state.card)
+
+    const [deletes, handleDeleteMovie, reset ] = useDelete([])
+
     return (
         <div >
-            <div onClick={() => console.log(exp.includes(movies[1].id))} style={{color: "white"}}
-            >Todas las peliculas</div>
+            <div style={{color: "white"}}
+            >Todas las Peliculas</div>
 
             <div className="section-movies">
             {
-                movies.map(data => (
-                    exp.includes(data.id) ? <></> : <MovieCard key={data.id} data={data} click={handleActive}/>
+                movies.map((data, key) => (
+                    deletes.includes(data.id) ? <div style={{display: "none"}} key={key}></div> : <MovieCard deleteMovie={handleDeleteMovie} key={data.id} data={data} click={handleActive}/>
                 ))
             }
             </div>
