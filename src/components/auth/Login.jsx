@@ -2,14 +2,16 @@ import React from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import '../../style/styleLogin.css';
 import { useForm } from '../../hooks/useForm';
-import { useDispatch } from 'react-redux';
-import { loginGoogle } from '../../actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginGoogle } from '../../actions/authActions';
 import { Link } from 'react-router-dom';
-import { loginEmailPassword } from '../../actions/actions';
+import { loginEmailPassword } from '../../actions/authActions';
 
 const Login = () => {
 
   const dispatch = useDispatch();
+
+  const { loading } = useSelector(state => state.ui)
 
   const [values, handleInputChange, reset] = useForm({
     email: '',
@@ -21,10 +23,14 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginEmailPassword(email, password))
+    
+    reset();
   }
 
   const handleLoginGoogle = () => {
     dispatch(loginGoogle());
+    
+    reset();
   }
   return (
     <div className="py-5 container text-center">
@@ -47,7 +53,7 @@ const Login = () => {
           name="password"
           value={password}
           onChange={handleInputChange} />
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={loading}>
           Enviar
         </Button>
 

@@ -1,0 +1,32 @@
+.card-movie {
+  width: 220px;
+  height: 330px;
+  margin: 12px 24px !important;
+}
+
+.card-movie > * {
+  margin: 0px !important;
+}
+
+.img-card {
+  max-width: 100%;
+}
+
+.rating{
+    position: relative;
+    top: 25%;
+    font-size: 22px;
+
+    padding: 12px;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100px;
+    border: 2px solid #0E3FA9;
+    border-left: none;
+    text-align: center;
+
+    color: white;
+    font-weight: bold;
+
+    border-radius: 0px 100px 100px 0px;
+}

@@ -2,12 +2,16 @@ import React from 'react'
 import { Form, Button } from 'react-bootstrap';
 import '../../style/styleRegister.css'
 import { useForm } from '../../hooks/useForm';
-import { registerEmailPasswordName } from '../../actions/actions';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { registerEmailPasswordName } from '../../actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import validator from 'validator'
+import { removeError, setError } from '../../actions/uiErrors';
+
 
 const Register = () => {
-
+    const history = useHistory();
+    const { msjError } = useSelector(state => state.ui)
     const dispatch = useDispatch();
 
     const [values, handleInputChange, reset] = useForm({
@@ -19,14 +23,47 @@ const Register = () => {
 
     const { name, email, pass1, pass2 } = values;
 
+    const formValid = () => {
+        if (name.trim().length === 0) {
+            dispatch(setError("Nombre requerido"));
+            return false
+        } else if (!validator.isEmail(email)) {
+            dispatch(setError("Email requerido"));
+            return false
+        } else if (pass1 !== pass2 || pass1 < 5) {
+            dispatch(setError("La contraseña es invalida"));
+            return false
+        }
+
+        dispatch(removeError(''))
+        return true
+    }
+
     const handleRegister = (e) => {
         e.preventDefault();
-        console.log(name, email, pass1, pass2);
-        dispatch(registerEmailPasswordName(email, pass1, name))
+
+        if (formValid()) {
+            dispatch(registerEmailPasswordName(email, pass1, name))
+
+            reset();
+
+            setTimeout(() => {
+                history.push("/auth/login");
+            }, 2500);
+
+        }
     }
 
     return (
         <div className="py-5 container text-center w-50">
+            {
+                msjError &&
+                (
+                    <div className="alert alert-danger">
+                        {msjError}
+                    </div>
+                )
+            }
             <Form onSubmit={handleRegister} className="d-flex flex-column m-0">
                 <h1 className="h3 mb-3 font-weight-normal">
                     ¡Registrate en nuestro sistema!

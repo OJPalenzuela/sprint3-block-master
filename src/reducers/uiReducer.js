@@ -17,13 +17,13 @@ export const uiReducer = (state = initialState, action) => {
                 msjError: null
             }
 
-        case types.uiStratLoading:
+        case types.uiStartLoading:
             return {
                 ...state,
                 loading: true
             }
 
-        case types.uiFinisLoading:
+        case types.uiFinishLoading:
             return {
                 ...state,
                 loading: false

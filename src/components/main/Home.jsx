@@ -1,9 +1,15 @@
+
 import React from 'react'
+import CarauselElement from './CarauselElement'
+import Navbar from './Navbar'
+import Section from './Section'
 
 const Home = () => {
     return (
         <div>
-            HOLA
+            <Navbar />
+            <CarauselElement />
+            <Section />
         </div>
     )
 }
