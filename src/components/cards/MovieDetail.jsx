@@ -7,8 +7,7 @@ const IMG_API = "https://image.tmdb.org/t/p/w500";
 
 const MovieDetail = memo(() => {
 
-    const {active} = useSelector(state => state.card);
-
+  const { active } = useSelector(state => state.card);
   return (
     <Fragment>
       <div
@@ -29,10 +28,13 @@ const MovieDetail = memo(() => {
               ></button>
             </div>
             <div className="modal-body">
-                <div className="container-fluid">
-                <img style={{width:"210px"}} src={IMG_API + active.poster_path} alt="movie-poster" />
-                <p>{active.overview}</p>
+              <div className="container-fluid d-flex">
+                <img className="m-2" style={{ width: "210px", height:"315px" }} src={IMG_API + active.poster_path} alt="movie-poster" />
+                <div className="m-2">
+                  <h2>{active.title}</h2>
+                  <p>{active.overview}</p>
                 </div>
+              </div>
             </div>
             <div className="modal-footer">
               <button

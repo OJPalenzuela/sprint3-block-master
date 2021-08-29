@@ -14,12 +14,13 @@ export const findMovies = () => {
   };
 };
 
-export const searchMovies = (name) => {
+export const searchMovies = (searchName, name) => {
   return (dispatch) => {
-    search(name).then((data) => {
+    search(searchName, name).then((data) => {
       dispatch({
         type: types.moviesSearch,  
         payload: {
+          name: searchName,
           results: data
         }
       });

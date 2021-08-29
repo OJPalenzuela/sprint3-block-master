@@ -6,50 +6,69 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { findMovies } from "../../actions/moviesActions";
 
-import { activeCard } from "../../actions/cardActions";
 import { useDelete } from "../../hooks/useDelete";
+
+import found from "../../assets/svg/not-found.svg"
 
 const Section = memo(() => {
   const [movies, setMovies] = useState([]);
-//   const [pages, setPages] = useState(1);
-  const moviesResult = useSelector((store) => store.movies.results);
-  const dispatch = useDispatch();
+  const [initial, setInitial] = useState(true)
 
+  //   const [pages, setPages] = useState(1);
+  const moviesResult = useSelector((store) => store.movies.results);
+  const moviesName = useSelector((store) => store.movies.name);
+  const moviesTitle = useSelector((store) => store.movies.title);
+
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    if (moviesResult.length < 1) {
+
+    if (initial && moviesResult.length < 1) {
       dispatch(findMovies());
+      setInitial(false)
     } else {
       setMovies(moviesResult);
+      
     }
-  }, [moviesResult, dispatch]);
+  }, [moviesResult, initial, dispatch]);
 
-//   const change = () => {
-//     setPages(pages + 1);
-//     console.log(pages);
-//   };
-  const handleActive = (data) => {
-    dispatch(activeCard(data.id, data));
-  };
+  //   const change = () => {
+  //     setPages(pages + 1);
+  //     console.log(pages);
+  //   };
 
-//   const { active } = useSelector((state) => state.card);
 
-  const [deletes, handleDeleteMovie ] = useDelete([]);
+  //   const { active } = useSelector((state) => state.card);
+
+  const [deletes, handleDeleteMovie] = useDelete([]);
   return (
     <div>
-      <div style={{ color: "white" }}>Todas las Peliculas</div>
+      <h1 style={{ color: "white" }}>{moviesTitle}</h1>
       <div className="section-movies">
-        {movies?.map((data, key) =>
-          deletes.includes(data.id) ? (
-            <div style={{ display: "none" }} key={key}></div>
-          ) : (
-            <MovieCard
-              deleteMovie={handleDeleteMovie}
-              key={data.id}
-              data={data}
-              click={handleActive}
-            />
-          )
-        )}
+
+
+
+        {
+
+          (movies.length > 0) ?
+          (
+          movies?.map(
+            (data, key) =>
+              deletes.includes(data.id) ?
+                (<div style={{ display: "none" }} key={key}></div>)
+                :
+                (<MovieCard
+                  deleteMovie={handleDeleteMovie}
+                  key={data.id}
+                  data={data}
+                />)
+          ))
+          :
+          (<div className="text-center text-white">
+            <img src={found} alt="" />
+            <h2>No se encontaron resultados para "{moviesName}"</h2>
+          </div>)
+        }
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const Navbar = () => {
     if (e.target.value.length < 1) {
         dispatch(findMovies())
     } else {
-        dispatch(searchMovies(e.target.value))
+        dispatch(searchMovies(e.target.value, e.target.value))
     }
     
   };
