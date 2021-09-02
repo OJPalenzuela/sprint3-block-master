@@ -4,6 +4,7 @@ const initialState = {
   title: "",
   name: "",
   results: []
+  
 };
 
 export const moviesReducer = (state = initialState, action) => {
@@ -16,9 +17,12 @@ export const moviesReducer = (state = initialState, action) => {
       };
     case types.movies:
       return {
+        ...state,
         title: "Todas las peliculas",
+
         results: action.payload.results
       };
+    
     default:
       return state;
   }

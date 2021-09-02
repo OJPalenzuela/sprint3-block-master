@@ -26,7 +26,9 @@ const MovieCard = ({ data, click, deleteMovie }) => {
           {data.vote_average}
         </div>
         <img className="img-card" src={
-          IMG_API + data.poster_path
+          data?.poster_path ?
+            IMG_API + data.poster_path :
+            data.file
           } alt="" />
       </div>
       <MovieDetail/>

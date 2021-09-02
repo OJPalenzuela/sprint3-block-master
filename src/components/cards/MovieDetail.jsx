@@ -1,13 +1,18 @@
 import React, { memo } from "react";
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { findTrailer } from "../../actions/moviesActions";
 
+import "../../style/styleMovieCard.css";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 
 
 const MovieDetail = memo(() => {
 
+  const dispatch = useDispatch();
   const { active } = useSelector(state => state.card);
+  console.log("creacion")
   return (
     <Fragment>
       <div
@@ -17,36 +22,62 @@ const MovieDetail = memo(() => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered modal-lg ">
-          <div className="modal-content">
-            <div className="modal-header">
+        <div className="modal-dialog modal-fullscreen modal-dialog-centered "
+        >
+          <div className="modal-content modal-background p-5">
+            <div className="modal-header modal-border">
               <button
                 type="button"
-                className="btn-close"
+                className="btn-close btn-close-white"
                 data-bs-dismiss="modal"
-                aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body modal-border">
               <div className="container-fluid d-flex">
-                <img className="m-2" style={{ width: "210px", height:"315px" }} src={IMG_API + active.poster_path} alt="movie-poster" />
+                <img className="m-2" style={{ width: "210px", height: "315px" }} src={active?.poster_path ?
+            IMG_API + active.poster_path :
+            active.file
+          } alt="movie-poster" />
                 <div className="m-2">
-                  <h2>{active.title}</h2>
-                  <p>{active.overview}</p>
+                  <h2>{active?.title}</h2>
+                  <p>{active?.overview}</p>
+                  <div className="modal-footer modal-border">
+                    <div className="div-crud">
+                      <button
+                        type="button"
+                        className="btn btn-delete"
+                      >
+                        <i className="fas fa-trash-alt"></i>
+                      </button>
+                      <Link
+                      to="/edit"
+                        type="button"
+                        className="btn btn-edit">
+                        <i className="fas fa-edit"></i>
+                      </Link>
+                    </div>
+                    <div className="div-views">
+                      <button
+                        type="button"
+                        className="btn btn-now"
+                        data-bs-dismiss="modal"
+                      >
+                        <i className="fas fa-play"></i>
+                        <p>VER AHORA</p>
+                      </button>
+                      <button
+                        onClick={() =>{
+                          dispatch(findTrailer(active?.title))
+                          console.log("Trailer")
+                        }}
+                      type="button" className="btn btn-after">
+                        <i className="fas fa-plus"></i>
+                        <p>VER DESPUÉS</p>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
             </div>
           </div>
         </div>

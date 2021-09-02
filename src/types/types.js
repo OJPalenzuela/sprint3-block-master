@@ -13,7 +13,9 @@ export const types = {
   cardUpdate: "[Card] Update cards",
   cardDelete: "[Card] Delete cards",
   cardClear: "[Card] Clear cards",
+  movieCardTrailer: "[Card] Trailer",
 
   movies: "[Movies]",
   moviesSearch: "[Movies] Search",
+  
 };

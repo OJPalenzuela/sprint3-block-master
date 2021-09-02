@@ -9,6 +9,7 @@ import { findMovies } from "../../actions/moviesActions";
 import { useDelete } from "../../hooks/useDelete";
 
 import found from "../../assets/svg/not-found.svg"
+import { ListarMovies } from "../../actions/cardActions";
 
 const Section = memo(() => {
   const [movies, setMovies] = useState([]);
@@ -19,12 +20,15 @@ const Section = memo(() => {
   const moviesName = useSelector((store) => store.movies.name);
   const moviesTitle = useSelector((store) => store.movies.title);
 
+  const moviesFS = useSelector((store) => store.card.card)
+
   const dispatch = useDispatch();
   
   useEffect(() => {
 
     if (initial && moviesResult.length < 1) {
       dispatch(findMovies());
+      dispatch(ListarMovies())
       setInitial(false)
     } else {
       setMovies(moviesResult);
@@ -46,7 +50,15 @@ const Section = memo(() => {
       <h1 style={{ color: "white" }}>{moviesTitle}</h1>
       <div className="section-movies">
 
-
+        {
+          moviesFS.map(data => (
+            <MovieCard
+                  deleteMovie={handleDeleteMovie}
+                  key={data.id}
+                  data={data}
+              />
+          ))
+        }
 
         {
 

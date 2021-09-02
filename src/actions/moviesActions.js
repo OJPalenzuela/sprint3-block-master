@@ -1,5 +1,5 @@
 import { types } from "../types/types";
-import { search, getMovies } from "../helpers/apiConnect";
+import { search, getMovies, getUrlTrailer } from "../helpers/apiConnect";
 
 export const findMovies = () => {
   return (dispatch) => {
@@ -22,6 +22,19 @@ export const searchMovies = (searchName, name) => {
         payload: {
           name: searchName,
           results: data
+        }
+      });
+    });
+  };
+};
+
+export const findTrailer = (name) => {
+  return (dispatch) => {
+    getUrlTrailer(name).then((data) => {
+      dispatch({
+        type: types.movieCardTrailer,  
+        payload: {
+          videoUrl: data
         }
       });
     });

@@ -12,21 +12,115 @@
   max-width: 100%;
 }
 
-.rating{
-    position: relative;
-    top: 25%;
-    font-size: 22px;
+.rating {
+  position: relative;
+  top: 25%;
+  font-size: 22px;
 
-    padding: 12px;
+  padding: 12px;
 
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 100px;
-    border: 2px solid #0E3FA9;
-    border-left: none;
-    text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100px;
+  border: 2px solid #0e3fa9;
+  border-left: none;
+  text-align: center;
 
-    color: white;
-    font-weight: bold;
+  color: white;
+  font-weight: bold;
 
-    border-radius: 0px 100px 100px 0px;
+  border-radius: 0px 100px 100px 0px;
+}
+
+.modal-border {
+  border: none;
+}
+
+.modal-content,
+.btn-close {
+  color: white !important;
+}
+
+.modal-background {
+  background-color: #000000d5;
+}
+
+.btn-now {
+  background-color: #fed941;
+  padding: 10px 20px;
+  width: 270px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+
+  text-align: center;
+  color: #000000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-after {
+  background-color: #0C0E16;
+  border: 2px solid #fed941;
+  padding: 10px 20px;
+  width: 270px;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+
+  text-align: center;
+  color: #fed941;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-now ,
+.btn-after{
+  margin: 0px 5px;
+}
+.btn-now p,
+.btn-after p {
+  margin: 0px 8px;
+}
+
+.div-views,
+.div-crud{
+  display: flex;
+}
+
+.btn-edit{
+  padding: 10px;
+  background-color: yellowgreen;
+  height: 48px;
+  width: 48px;
+
+  text-align: center;
+}
+.btn-delete{
+  padding: 10px;
+  background-color: rgb(253, 53, 53);
+  height: 48px;
+  width: 48px;
+
+  text-align: center;
+}
+
+.btn-delete,
+.btn-edit{
+  margin: 0px 5px;
+  font-size: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.modal-footer{
+  justify-content: space-between;
 }

@@ -46,9 +46,9 @@ const AppRouter = () => {
                 />
 
                 <PrivateRoute
-                path="/"
-                component={MainRoute}
-                isAuthenticated={isLooggedIn}
+                    path="/"
+                    component={MainRoute}
+                    isAuthenticated={isLooggedIn}
                 />
 
                 <Redirect to="/auth/login" />

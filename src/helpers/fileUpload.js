@@ -3,7 +3,7 @@ export const fileUpload = async(file) => {
 
     const cluodUrl = 'https://api.cloudinary.com/v1_1/dfdibw2mk/image/upload'
     const fromData = new FormData();
-    fromData.append('upload_preset', 'sprint3-block-mastrer');
+    fromData.append('upload_preset', 'sprint3-block-master');
     fromData.append('file', file);
 
     try {
