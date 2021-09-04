@@ -9,15 +9,8 @@ export const useDelete = ( initialState = []) => {
         setDeletes( initialState );
     }
 
-    const handleDeleteMovie = (id) => {
-        setDeletes([
-            ...deletes, id
-            ]
-            
-        )
-        console.log(deletes)
-    }
+    
 
-    return [ deletes, handleDeleteMovie, reset ];
+    return [ deletes, setDeletes, reset ];
 
 }

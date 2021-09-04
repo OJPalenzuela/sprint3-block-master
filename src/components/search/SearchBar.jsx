@@ -3,7 +3,9 @@ import { useDispatch } from "react-redux";
 import { Form, FormControl } from "react-bootstrap";
 
 const SearchBar = ({ filter, handleChange, searchTerm }) => {
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (searchTerm.length > 0) {
       dispatch(filter(searchTerm.toLowerCase()));
@@ -17,7 +19,7 @@ const SearchBar = ({ filter, handleChange, searchTerm }) => {
           type="search"
           className="mr-2"
           aria-label="Search"
-          value={searchTerm}
+          value={searchTerm.toLowerCase()}
           onChange={handleChange}
         />
         <button className="">

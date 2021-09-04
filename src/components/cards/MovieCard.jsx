@@ -31,7 +31,9 @@ const MovieCard = ({ data, click, deleteMovie }) => {
             data.file
           } alt="" />
       </div>
-      <MovieDetail/>
+      <MovieDetail
+        delete={deleteMovie}
+      />
     </div>
   );
 };

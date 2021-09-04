@@ -15,7 +15,8 @@ export const types = {
   cardClear: "[Card] Clear cards",
   movieCardTrailer: "[Card] Trailer",
 
-  movies: "[Movies]",
+  movies: "[Movies] Listar Movies",
   moviesSearch: "[Movies] Search",
+  moviesSearchFB: "[Movies] SearchFB",
   
 };

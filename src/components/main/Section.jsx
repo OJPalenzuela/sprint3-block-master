@@ -11,9 +11,16 @@ import { useDelete } from "../../hooks/useDelete";
 import found from "../../assets/svg/not-found.svg"
 import { ListarMovies } from "../../actions/cardActions";
 
+const search = (term) => {
+  return function (x) {
+      return x.title.toLowerCase().includes(term) || !term;
+  }
+}
+
 const Section = memo(() => {
   const [movies, setMovies] = useState([]);
   const [initial, setInitial] = useState(true)
+  const [pages, setPages] = useState(1)
 
   //   const [pages, setPages] = useState(1);
   const moviesResult = useSelector((store) => store.movies.results);
@@ -27,31 +34,41 @@ const Section = memo(() => {
   useEffect(() => {
 
     if (initial && moviesResult.length < 1) {
-      dispatch(findMovies());
+      dispatch(findMovies(pages));
       dispatch(ListarMovies())
       setInitial(false)
     } else {
       setMovies(moviesResult);
+    }
+
+    if(pages !== 1){
       
     }
-  }, [moviesResult, initial, dispatch]);
+    dispatch(ListarMovies())
+    
+  }, [moviesResult, initial, dispatch, pages]);
 
-  //   const change = () => {
-  //     setPages(pages + 1);
-  //     console.log(pages);
-  //   };
+  const onScrollToEnd = () => {
+    setPages(pages + 1)
+    
+  }
 
-
-  //   const { active } = useSelector((state) => state.card);
+  window.onscroll = function (){
+    if(window.innerHeight + document.documentElement.scrollTop 
+      === document.documentElement.offsetHeight){
+      onScrollToEnd()
+      console.log(pages)
+    }
+  }
 
   const [deletes, handleDeleteMovie] = useDelete([]);
   return (
-    <div>
+    <div >
       <h1 style={{ color: "white" }}>{moviesTitle}</h1>
       <div className="section-movies">
 
         {
-          moviesFS.map(data => (
+          moviesFS?.filter(search(moviesName))?.map(data => (
             <MovieCard
                   deleteMovie={handleDeleteMovie}
                   key={data.id}

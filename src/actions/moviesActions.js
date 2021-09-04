@@ -1,9 +1,9 @@
 import { types } from "../types/types";
 import { search, getMovies, getUrlTrailer } from "../helpers/apiConnect";
 
-export const findMovies = () => {
+export const findMovies = (page) => {
   return (dispatch) => {
-    getMovies().then((data) => {
+    getMovies(page).then((data) => {
       dispatch({
         type: types.movies,  
         payload: {
@@ -27,6 +27,13 @@ export const searchMovies = (searchName, name) => {
     });
   };
 };
+
+export const searchMoviesFB = (searchName) => ({
+        type: types.moviesSearchFB,  
+        payload: {
+          nameFirebase: searchName
+        }
+});
 
 export const findTrailer = (name) => {
   return (dispatch) => {

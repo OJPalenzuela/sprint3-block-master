@@ -6,6 +6,9 @@ import { startLogout } from "../../actions/authActions";
 import SearchBar from "../search/SearchBar";
 import {searchMovies, findMovies} from "../../actions/moviesActions"
 
+
+
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.auth);
@@ -14,11 +17,11 @@ const Navbar = () => {
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length < 1) {
-        dispatch(findMovies())
+        dispatch(findMovies(1))
     } else {
         dispatch(searchMovies(e.target.value, e.target.value))
+        
     }
-    
   };
 
   return (

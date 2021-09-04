@@ -1,18 +1,29 @@
-import React, { memo } from "react";
+import React from "react";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { findTrailer } from "../../actions/moviesActions";
+import { useDelete } from "../../hooks/useDelete";
 
 import "../../style/styleMovieCard.css";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 
 
-const MovieDetail = memo(() => {
+const MovieDetail = () => {
 
   const dispatch = useDispatch();
   const { active } = useSelector(state => state.card);
   console.log("creacion")
+
+  const handleDeleteMovie = ({ id }) => {
+    setDeletes([
+        ...deletes, id
+        ]
+    )
+    console.log(deletes)
+  }
+
+  const [deletes, setDeletes] = useDelete([]);
   return (
     <Fragment>
       <div
@@ -46,6 +57,7 @@ const MovieDetail = memo(() => {
                       <button
                         type="button"
                         className="btn btn-delete"
+                        onClick={() => handleDeleteMovie(active)}
                       >
                         <i className="fas fa-trash-alt"></i>
                       </button>
@@ -84,6 +96,6 @@ const MovieDetail = memo(() => {
       </div>
     </Fragment>
   );
-});
+};
 
 export default MovieDetail;

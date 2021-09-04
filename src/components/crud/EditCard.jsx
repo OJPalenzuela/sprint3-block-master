@@ -1,42 +1,57 @@
+import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { CardNew, Edit, startUploading } from '../../actions/cardActions';
-import { useForm } from '../../hooks/useForm';
+import * as Yup from 'yup'
+
+import { useHistory } from "react-router-dom";
 
 const EditCard = () => {
+    const history = useHistory();
     const dispatch = useDispatch()
     const { active } = useSelector(state => state.card)
 
-    const [values, handleInputChange, reset ] = useForm(active)
-
     const activeId = useRef(active.id)
+
+    const formik = useFormik({
+        initialValues: { ...active },
+
+        validationSchema: Yup.object({
+            title: Yup.string().required(),
+            overview: Yup.string().required(),
+            file: Yup.string().required()
+        }),
+
+        onSubmit: (data) => {
+            if (active.title === "") {
+                dispatch(CardNew(data))
+                
+            } else if (active.id !== "") {
+                dispatch(Edit(data))
+            }
+            console.log(data)
+
+            formik.resetForm()
+            history.push("/")
+        }
+
+    })
 
     useEffect(() => {
         if (active.id !== activeId.current) {
-            reset(active)
+            formik.resetForm();
         }
         activeId.current = active.id
-    }, [active, reset])
+    }, [active, formik])
 
-    const { title, overview, file } = values
-
-    const handleFileChange = (e) => {
-        console.log(file)
+    const handleFileChange = async (e) => {
         if (e.target.files[0]) {
-            dispatch(startUploading(e.target.files[0]))
+            const fileUrl = await dispatch(startUploading(e.target.files[0]))
+            const inputFileUrl = document.getElementById("fileinput")
+            console.log(fileUrl)
+            inputFileUrl.value = fileUrl
+            formik.values.file = fileUrl
         }
-    }
-
-    const handlNewCard = (e) => {
-        e.preventDefault();
-
-        if (active.title === "") {
-            dispatch(CardNew(values))
-            reset()
-        } else if (active.id !== "") {
-            dispatch(Edit(values))
-        }
-        //dispatch(clearCard())
     }
 
     const handlePictureClick = () => {
@@ -46,15 +61,16 @@ const EditCard = () => {
     return (
         <div className="card container text-center">
             <h2>Agregar nueva tarea</h2>
-            <form className="card-body " onSubmit={handlNewCard}>
+
+            <form className="card-body " onSubmit={formik.handleSubmit}>
                 <div className="form-group">
                     <input
                         type="text"
                         name="title"
                         className="form-control mt-1"
                         placeholder="Title"
-                        value={title}
-                        onChange={handleInputChange}
+                        value={formik.values.title}
+                        onChange={formik.handleChange}
                     />
                 </div>
 
@@ -64,28 +80,34 @@ const EditCard = () => {
                         name="overview"
                         className="form-control mt-1"
                         placeholder="Descripción"
-                        value={overview}
-                        onChange={handleInputChange}
+                        value={formik.values.overview}
+                        onChange={formik.handleChange}
                     />
                 </div>
+
+                <div
+                    className="btn border-bottom shadow-sm"
+                    onClick={handlePictureClick}
+                >Picture</div>
+
                 <input
                     id="fileSelector"
                     type="file"
-                    name="file"
+                    name="fileInput"
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />
-                <div>
-                    <input
-                        type="button"
-                        className="btn border-bottom shadow-sm"
-                        value="Picture"
-                        onClick={handlePictureClick}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary mt-2">
-                    Save
-                </button>
+                
+                <input
+                    type="text"
+                    placeholder="Url"
+                    name="file"
+                    disabled
+                    id="fileinput"
+                    value={formik.values.file}
+                />
+                <input type="submit" className="btn btn-primary mt-2" value="save"/>
+                    
             </form>
         </div>
     )

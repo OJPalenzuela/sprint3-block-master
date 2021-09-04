@@ -13,11 +13,21 @@ export const CardNew = (movie) => {
         const newCard = {
             title: movie.title,
             overview: movie.overview,
-            file: fileUrl,
-            rating: ""
+            file: movie.file,
+            rating: "",
+            url: "",
         }
         console.log(newCard.file)
+        Swal.fire({
+            title: 'Uploading...',
+            text: 'Please wait ...',
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            }
+        })
         const docRef = await db.collection('Movies').add(newCard)
+        Swal.fire('Saved', movie.title, 'success');
         dispatch(addNewCard(docRef.id, newCard))
 
     }
@@ -33,7 +43,7 @@ export const Edit = (movie) => {
         const EditMovie = {
             title: movie.title,
             overview: movie.overview,
-            file: fileUrl,
+            file: movie.file,
             rating: ""
         }
 
