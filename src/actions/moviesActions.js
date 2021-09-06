@@ -43,7 +43,9 @@ export const findTrailer = (name) => {
         payload: {
           videoUrl: data
         }
-      });
+      })
+      
+      window.open(data, '_blank')
     });
   };
 };

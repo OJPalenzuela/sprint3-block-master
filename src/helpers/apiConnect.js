@@ -1,5 +1,4 @@
 
-
 const API_KEY = "ba637e394d1e5b8a3166bd550b19bb5f"
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}`
 
@@ -30,11 +29,9 @@ const getMoviesID = async (name) => {
 
 const getUrlTrailer = async (name) => {
     const {id} = await getMoviesID(name)
-    console.log(id)
     const reponse = await fetch(`https://imdb-api.com/en/API/YouTubeTrailer/k_r1xct2m2/${id}`)
     const data = await reponse.json()
     const {videoUrl} = data
-    console.log(videoUrl)
     if(videoUrl === null){
         return ""
     }else{   

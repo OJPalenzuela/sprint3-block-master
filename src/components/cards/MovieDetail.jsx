@@ -24,6 +24,10 @@ const MovieDetail = ({isApi}) => {
     }
   }
 
+  const handleTrailer = (title) => {
+    dispatch(findTrailer(title))
+  }
+
 
   return (
     <Fragment>
@@ -80,8 +84,7 @@ const MovieDetail = ({isApi}) => {
                       </button>
                       <button
                         onClick={() =>{
-                          dispatch(findTrailer(active?.title))
-                          console.log("Trailer")
+                          handleTrailer(active?.title)
                         }}
                       type="button" className="btn btn-after">
                         <i className="fas fa-plus"></i>
