@@ -40,7 +40,6 @@ export const cardsReducer = (state = initialState, action) => {
 
 
         case types.cardUpdate:
-            console.log(action.payload.id)
             return {
                 ...state,
                 card: state.card.map(

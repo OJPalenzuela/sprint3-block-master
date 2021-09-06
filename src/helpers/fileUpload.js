@@ -14,7 +14,6 @@ export const fileUpload = async(file) => {
 
         if(resp.ok){
               const cluodRes = await resp.json()
-              console.log('data',cluodRes)
               return cluodRes.secure_url;
         }else{
             throw await resp.json();

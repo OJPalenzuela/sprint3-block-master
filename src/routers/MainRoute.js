@@ -5,15 +5,18 @@ import EditCard from '../components/crud/EditCard';
 import MostValued from '../components/main/MostValued';
 import Section from '../components/main/Section';
 import LeastValued from '../components/main/LeastValued';
-import CarauselElement from '../components/main/CarauselElement';
 
 export const MainRoute = () => {
+      
+if(localStorage.getItem("deletes") === undefined || localStorage.getItem("deletes") === ""){
+    localStorage.setItem("deletes", {});
+}
     return (
         <div>
             
             <div>
             <Navbar />
-            <CarauselElement />
+            
                 <Switch>
                     <Route
                         exact

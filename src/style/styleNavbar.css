@@ -128,10 +128,20 @@
     border-radius:  0px 5px 5px 0px;
 }
 
+.search .edit{
+    height: 30px;
+    text-align: center;
+    width: 72px;
+    border: none;
+    background-color: #2f7015;
+    color: black;
+    border-radius:  5px 0px 0px 5px;
+}
+
 .search input{
     width: 300px;
     border: none;
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 0px 0px 0px 0px;
 } 
 
 @media screen and (max-width: 890px) {

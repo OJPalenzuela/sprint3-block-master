@@ -13,11 +13,13 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.auth);
   const [searchTerm, setSearchTerm] = useState("");
+  
+  const searchBy = useSelector((store) => store.movies.searchBy)
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length < 1) {
-        dispatch(findMovies(1))
+        dispatch(findMovies(searchBy, 1))
     } else {
         dispatch(searchMovies(e.target.value, e.target.value))
     }

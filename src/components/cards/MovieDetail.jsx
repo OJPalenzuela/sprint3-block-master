@@ -18,7 +18,7 @@ const MovieDetail = ({isApi}) => {
   const handleDeleteMovie = id => {
     console.log(isApi)
     if(isApi){
-      console.log("API")
+      
     }else{
       dispatch(Delete(id))
     }
@@ -85,7 +85,7 @@ const MovieDetail = ({isApi}) => {
                         }}
                       type="button" className="btn btn-after">
                         <i className="fas fa-plus"></i>
-                        <p>VER DESPUÉS</p>
+                        <p>VER TRAILER</p>
                       </button>
                     </div>
                   </div>

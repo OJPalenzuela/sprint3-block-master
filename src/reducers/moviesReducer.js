@@ -4,7 +4,8 @@ const initialState = {
   title: "",
   name: "",
   results: [],
-  deletes: []
+  deletes: [],
+  searchBy: "release_date.desc",
 };
 
 export const moviesReducer = (state = initialState, action) => {
@@ -31,6 +32,11 @@ export const moviesReducer = (state = initialState, action) => {
           name: '',
           results: [...state.results, ...action.payload.results]
         };
+      case types.moviesSearchBy:
+        return{
+          ...state,
+          searchBy: action.payload.searchBy,
+        }
     default:
       return state;
   }

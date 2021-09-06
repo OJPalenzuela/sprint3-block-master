@@ -3,10 +3,11 @@ import MovieCard from "../cards/MovieCard";
 import "../../style/styleSection.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { findMovies } from "../../actions/moviesActions";
+import { findMovies, searchBy } from "../../actions/moviesActions";
 import { useDelete } from "../../hooks/useDelete";
 import found from "../../assets/svg/not-found.svg"
 import { ListarMovies } from "../../actions/cardActions";
+import CarauselElement from "./CarauselElement";
 
 const search = (term) => {
   return function (x) {
@@ -17,36 +18,36 @@ const search = (term) => {
 const Section = () => {
   const [movies, setMovies] = useState([]);
   const [initial, setInitial] = useState(true)
-  const [pages, setPages] = useState(1)
-  const [deletes, handleDeleteMovie] = useDelete([]);
+  const [pages] = useState(1)
+  const [deletes] = useDelete();
   const moviesResult = useSelector((store) => store.movies.results);
   const moviesName = useSelector((store) => store.movies.name);
   const moviesTitle = useSelector((store) => store.movies.title);
   const moviesFS = useSelector((store) => store.card.card)
 
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    console.log("A")
 
-    if (initial && moviesResult.length < 1) {
+
+  useEffect(() => {
+    dispatch(searchBy("release_date.desc"))
+
+    if (initial) {
+      
+
       dispatch(findMovies("release_date.desc", pages));
       dispatch(ListarMovies())
       setInitial(false)
     } else {
       setMovies(moviesResult);
-      console.log("AAA")
-    }
-
-    if(pages !== 1){
-      
     }
     dispatch(ListarMovies())
-    
+  
   }, [moviesResult, initial, dispatch, pages]);
 
   return (
-    <div >
+    <div>
+      <CarauselElement />
+      <div >
       
       <h1 style={{ color: "white" }}>{moviesTitle}</h1>
       <div className="section-movies">
@@ -84,6 +85,8 @@ const Section = () => {
         }
       </div>
     </div>
+    </div>
+    
   );
 };
 

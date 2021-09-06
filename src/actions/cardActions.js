@@ -17,7 +17,6 @@ export const CardNew = (movie) => {
             rating: "",
             url: "",
         }
-        console.log(newCard.file)
         Swal.fire({
             title: 'Uploading...',
             text: 'Please wait ...',
@@ -60,7 +59,6 @@ export const Edit = (movie) => {
         })
 
         await db.doc(`Movies/${movie.id}`).update(EditMovie)
-        console.log(EditMovie)
 
         Swal.fire('Saved', movie.title, 'success');
         dispatch(ListarMovies())
@@ -102,7 +100,6 @@ export const startUploading = (file) => {
         })
 
         fileUrl = await fileUpload(file)
-        console.log(fileUrl)
         Swal.close()
 
         return fileUrl

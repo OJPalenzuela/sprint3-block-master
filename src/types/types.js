@@ -18,5 +18,6 @@ export const types = {
   movies: "[Movies] Listar Movies",
   moviesSearch: "[Movies] Search",
   moviesSearchFB: "[Movies] SearchFB",
+  moviesSearchBy: "[Movies] SearchBy",
   
 };

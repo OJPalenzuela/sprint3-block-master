@@ -12,7 +12,6 @@ export const loginEmailPassword = (email, password) => {
                 dispatch(
                     login(user.uid, user.displayName)
                 )
-                console.log('Bienvenid@');
             })
             .catch(e => {
                 console.log(e);

@@ -19,9 +19,8 @@ const search = async (name) => {
 const getMoviesID = async (name) => {
     const reponse = await fetch(`https://imdb-api.com/en/API/SearchMovie/k_r1xct2m2/${name}`);
     const data = await reponse.json()
-    console.log(name, data)
+    
     const {results} = data
-    console.log(results)
     if(results === null){
         return ""
     }else{   

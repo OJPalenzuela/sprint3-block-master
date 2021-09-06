@@ -2,41 +2,39 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "../cards/MovieCard";
 import "../../style/styleSection.css";
 import { useSelector, useDispatch } from "react-redux";
-import { findMovies } from "../../actions/moviesActions";
+import { findMovies, searchBy } from "../../actions/moviesActions";
 import { useDelete } from "../../hooks/useDelete";
 import found from "../../assets/svg/not-found.svg"
+import CarauselElement from "./CarauselElement";
 
 const MostValued = () => {
     const [movies, setMovies] = useState([]);
     const [initial, setInitial] = useState(true)
-    const [pages, setPages] = useState(1)
+    const [pages] = useState(1)
     const [deletes, handleDeleteMovie] = useDelete([]);
     const moviesResult = useSelector((store) => store.movies.results);
     const moviesName = useSelector((store) => store.movies.name);
 
     const dispatch = useDispatch();
+    
 
     useEffect(() => {
-        console.log("B")
-        console.log("b", initial)
-        console.log("movie", moviesResult.length < 1)
-        if (initial && moviesResult.length < 1) {
+        dispatch(searchBy("popularity.desc"))
+        
+        if (initial) {
             dispatch(findMovies("popularity.desc", pages));
             setInitial(false)
             
         } else {
             setMovies(moviesResult);
-            console.log("BBB")
-        }
-
-        if (pages !== 1) {
-
         }
 
     }, [moviesResult, initial, dispatch, pages]);
 
     return (
         <div>
+            <CarauselElement />
+            <div>
             <h1 style={{ color: "white" }}>Más populares</h1>
             <div className="section-movies">
                 {
@@ -61,6 +59,8 @@ const MostValued = () => {
                 }
             </div>
         </div>
+        </div>
+        
     )
 }
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-export const useDelete = ( initialState = []) => {
+export const useDelete = ( initialState = localStorage.getItem("deletes").split(",")) => {
     
     const [deletes, setDeletes] = useState(initialState);
 
@@ -9,8 +9,12 @@ export const useDelete = ( initialState = []) => {
         setDeletes( initialState );
     }
 
-    
+    const handleDelete = (id) => {
+        localStorage.setItem("deletes", [localStorage.getItem("deletes"), id])
+        const de = localStorage.getItem("deletes")
 
-    return [ deletes, setDeletes, reset ];
+        setDeletes(de.split(","))
+    }
+    return [ deletes, handleDelete, reset ];
 
 }
