@@ -3,16 +3,27 @@ import { useDispatch } from "react-redux";
 import { activeCard } from "../../actions/cardActions";
 
 import "../../style/styleMovieCard.css";
+import file from "../../assets/images/not-found.jpg"
 import MovieDetail from "./MovieDetail";
 
 const IMG_API = "https://image.tmdb.org/t/p/w500/";
 
-const MovieCard = ({ data, click, deleteMovie }) => {
+const MovieCard = ({ data, apiDelete }) => {
   const dispatch = useDispatch();
 
   const handleActive = (data) => {
     dispatch(activeCard(data.id, data));
   };
+
+  const setImage = () => {
+    if(data?.poster_path !== undefined && data?.poster_path !== null){
+      return IMG_API + data.poster_path
+    }else if(data?.file !== undefined && data?.file !== null){
+      return data.file
+    }else {
+      return file
+    }
+  }
 
   return (
     <div
@@ -26,13 +37,11 @@ const MovieCard = ({ data, click, deleteMovie }) => {
           {data.vote_average}
         </div>
         <img className="img-card" src={
-          data?.poster_path ?
-            IMG_API + data.poster_path :
-            data.file
+          setImage()
           } alt="" />
       </div>
       <MovieDetail
-        delete={deleteMovie}
+        isApi = {apiDelete}
       />
     </div>
   );

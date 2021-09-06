@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../actions/authActions";
 import SearchBar from "../search/SearchBar";
 import {searchMovies, findMovies} from "../../actions/moviesActions"
-
+import { Link } from "react-router-dom";
 
 
 
@@ -20,7 +20,6 @@ const Navbar = () => {
         dispatch(findMovies(1))
     } else {
         dispatch(searchMovies(e.target.value, e.target.value))
-        
     }
   };
 
@@ -34,19 +33,13 @@ const Navbar = () => {
           <img src={image} alt="logo" />
           <ul id="nav-ul">
             <li>
-              <a className="link" href="#welcome-section">
-                Todas
-              </a>
+              <Link to="/">Todas</Link>
             </li>
             <li>
-              <a className="link" href="#projects">
-                Más valoradas
-              </a>
+              <Link to="/most_valued">Más valoradas</Link>
             </li>
             <li>
-              <a className="link" href="#section-contact">
-                Menos valoradas
-              </a>
+              <Link to="/least_valued">Menos valoradas</Link>
             </li>
           </ul>
         </div>

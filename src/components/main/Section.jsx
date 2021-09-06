@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "../cards/MovieCard";
 import "../../style/styleSection.css";
-import { memo } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-
 import { findMovies } from "../../actions/moviesActions";
-
 import { useDelete } from "../../hooks/useDelete";
-
 import found from "../../assets/svg/not-found.svg"
 import { ListarMovies } from "../../actions/cardActions";
 
@@ -17,28 +14,28 @@ const search = (term) => {
   }
 }
 
-const Section = memo(() => {
+const Section = () => {
   const [movies, setMovies] = useState([]);
   const [initial, setInitial] = useState(true)
   const [pages, setPages] = useState(1)
-
-  //   const [pages, setPages] = useState(1);
+  const [deletes, handleDeleteMovie] = useDelete([]);
   const moviesResult = useSelector((store) => store.movies.results);
   const moviesName = useSelector((store) => store.movies.name);
   const moviesTitle = useSelector((store) => store.movies.title);
-
   const moviesFS = useSelector((store) => store.card.card)
 
   const dispatch = useDispatch();
   
   useEffect(() => {
+    console.log("A")
 
     if (initial && moviesResult.length < 1) {
-      dispatch(findMovies(pages));
+      dispatch(findMovies("release_date.desc", pages));
       dispatch(ListarMovies())
       setInitial(false)
     } else {
       setMovies(moviesResult);
+      console.log("AAA")
     }
 
     if(pages !== 1){
@@ -48,31 +45,18 @@ const Section = memo(() => {
     
   }, [moviesResult, initial, dispatch, pages]);
 
-  const onScrollToEnd = () => {
-    setPages(pages + 1)
-    
-  }
-
-  window.onscroll = function (){
-    if(window.innerHeight + document.documentElement.scrollTop 
-      === document.documentElement.offsetHeight){
-      onScrollToEnd()
-      console.log(pages)
-    }
-  }
-
-  const [deletes, handleDeleteMovie] = useDelete([]);
   return (
     <div >
+      
       <h1 style={{ color: "white" }}>{moviesTitle}</h1>
       <div className="section-movies">
 
         {
           moviesFS?.filter(search(moviesName))?.map(data => (
             <MovieCard
-                  deleteMovie={handleDeleteMovie}
                   key={data.id}
                   data={data}
+                  apiDelete={false}
               />
           ))
         }
@@ -87,9 +71,9 @@ const Section = memo(() => {
                 (<div style={{ display: "none" }} key={key}></div>)
                 :
                 (<MovieCard
-                  deleteMovie={handleDeleteMovie}
                   key={data.id}
                   data={data}
+                  apiDelete={true}
                 />)
           ))
           :
@@ -101,6 +85,6 @@ const Section = memo(() => {
       </div>
     </div>
   );
-});
+};
 
 export default Section;

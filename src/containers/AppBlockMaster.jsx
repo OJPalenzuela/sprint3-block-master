@@ -11,11 +11,9 @@ import '../style/styleGlobal.css'
 
 const AppBlockMaster = () => {
 
-    
-
     return (
         <Provider store={store}>
-            <AppRouter onScroll={() => console.log("HOLA")}/>
+            <AppRouter/>
         </Provider>
     )
 }

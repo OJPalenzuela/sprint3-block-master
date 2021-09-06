@@ -1,0 +1,41 @@
+.edit-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+
+.edit{
+    background-color: #A7A9BE;
+    padding: 16px;
+    width: 800px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    margin: 0;
+    width: 600px;
+}
+
+.inputFile{
+    height: 40px;
+}
+
+.linkFile{
+    width: 80%;
+}
+
+.btn{
+    width: 20%;
+}
+
+.save-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

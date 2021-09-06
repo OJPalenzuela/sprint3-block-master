@@ -60,7 +60,7 @@ const Login = () => {
 
       </Form>
 
-      <Container className="auth__social-networks d-flex flex-column">
+      <Container className="auth__social-networks d-flex">
         <Button
           variant="primary" className="google-btn"
           onClick={handleLoginGoogle}>

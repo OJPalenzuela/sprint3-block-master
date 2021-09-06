@@ -1,9 +1,9 @@
 import { types } from "../types/types";
 import { search, getMovies, getUrlTrailer } from "../helpers/apiConnect";
 
-export const findMovies = (page) => {
+export const findMovies = (by, page) => {
   return (dispatch) => {
-    getMovies(page).then((data) => {
+    getMovies(by ,page).then((data) => {
       dispatch({
         type: types.movies,  
         payload: {

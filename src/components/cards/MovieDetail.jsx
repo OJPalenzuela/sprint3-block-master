@@ -2,28 +2,29 @@ import React from "react";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Delete } from "../../actions/cardActions";
 import { findTrailer } from "../../actions/moviesActions";
-import { useDelete } from "../../hooks/useDelete";
 
 import "../../style/styleMovieCard.css";
 const IMG_API = "https://image.tmdb.org/t/p/w500";
 
 
-const MovieDetail = () => {
+const MovieDetail = ({isApi}) => {
 
   const dispatch = useDispatch();
   const { active } = useSelector(state => state.card);
-  console.log("creacion")
+  
 
-  const handleDeleteMovie = ({ id }) => {
-    setDeletes([
-        ...deletes, id
-        ]
-    )
-    console.log(deletes)
+  const handleDeleteMovie = id => {
+    console.log(isApi)
+    if(isApi){
+      console.log("API")
+    }else{
+      dispatch(Delete(id))
+    }
   }
 
-  const [deletes, setDeletes] = useDelete([]);
+
   return (
     <Fragment>
       <div
@@ -57,7 +58,7 @@ const MovieDetail = () => {
                       <button
                         type="button"
                         className="btn btn-delete"
-                        onClick={() => handleDeleteMovie(active)}
+                        onClick={() => handleDeleteMovie(active.id)}
                       >
                         <i className="fas fa-trash-alt"></i>
                       </button>

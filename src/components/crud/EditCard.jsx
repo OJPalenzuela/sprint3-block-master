@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { CardNew, Edit, startUploading } from '../../actions/cardActions';
 import * as Yup from 'yup'
-
+import '../../style/styleEdit.css'
 import { useHistory } from "react-router-dom";
 
 const EditCard = () => {
@@ -25,7 +25,7 @@ const EditCard = () => {
         onSubmit: (data) => {
             if (active.title === "") {
                 dispatch(CardNew(data))
-                
+
             } else if (active.id !== "") {
                 dispatch(Edit(data))
             }
@@ -59,56 +59,67 @@ const EditCard = () => {
     }
 
     return (
-        <div className="card container text-center">
-            <h2>Agregar nueva tarea</h2>
+        <div className="edit-container">
+            <div className="edit">
+                <h2>Agregar nueva tarea</h2>
 
-            <form className="card-body " onSubmit={formik.handleSubmit}>
-                <div className="form-group">
-                    <input
-                        type="text"
-                        name="title"
-                        className="form-control mt-1"
-                        placeholder="Title"
-                        value={formik.values.title}
-                        onChange={formik.handleChange}
-                    />
-                </div>
+                <form className="form" onSubmit={formik.handleSubmit}>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            name="title"
+                            className="form-control mt-1"
+                            placeholder="Title"
+                            value={formik.values.title}
+                            onChange={formik.handleChange}
+                        />
+                    </div>
 
-                <div className="form-group">
-                    <input
-                        type="text"
-                        name="overview"
-                        className="form-control mt-1"
-                        placeholder="Descripción"
-                        value={formik.values.overview}
-                        onChange={formik.handleChange}
-                    />
-                </div>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            name="overview"
+                            className="form-control mt-1"
+                            placeholder="Descripción"
+                            value={formik.values.overview}
+                            onChange={formik.handleChange}
+                        />
+                    </div>
+                    <div>
 
-                <div
-                    className="btn border-bottom shadow-sm"
-                    onClick={handlePictureClick}
-                >Picture</div>
 
-                <input
-                    id="fileSelector"
-                    type="file"
-                    name="fileInput"
-                    style={{ display: 'none' }}
-                    onChange={handleFileChange}
-                />
-                
-                <input
-                    type="text"
-                    placeholder="Url"
-                    name="file"
-                    disabled
-                    id="fileinput"
-                    value={formik.values.file}
-                />
-                <input type="submit" className="btn btn-primary mt-2" value="save"/>
+                        <input
+                            id="fileSelector"
+                            type="file"
+                            name="fileInput"
+                            style={{ display: 'none' }}
+                            onChange={handleFileChange}
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Url"
+                            name="file"
+                            disabled
+                            id="fileinput"
+                            className="inputFile linkFile"
+                            value={formik.values.file}
+                        />
+
+                        <div
+                            className="btn btn-secondary shadow-sm inputFile"
+                            onClick={handlePictureClick}
+                        >Picture</div>
+                    </div>
                     
-            </form>
+                    <div className="save-div">
+                    <input type="submit" className="btn btn-primary save" value="Guardar" />
+
+                    </div>
+
+                </form>
+            </div>
+
         </div>
     )
 }
