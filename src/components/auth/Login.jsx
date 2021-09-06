@@ -23,77 +23,78 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginEmailPassword(email, password))
-    
+
     reset();
   }
 
   const handleLoginGoogle = () => {
     dispatch(loginGoogle());
-    
+
     reset();
   }
   return (
-    <div className="py-5 container text-center">
-      <Form onSubmit={handleLogin} className="m-0">
-        <h1 className="h4 mb-3 font-weight-normal">
-          Inicio de sesión
-        </h1>
-        <Form.Control
-          className="mb-1"
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={email}
-          onChange={handleInputChange} />
+    <div className="superLogin">
+      <div className="login-div">
+        <Form onSubmit={handleLogin} className="form-login">
+          <h1 className="h4 mb-3 font-weight-normal">
+            Inicio de sesión
+          </h1>
+          <Form.Control
+            className="mb-1"
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={handleInputChange} />
 
-        <Form.Control
-          className="mb-1"
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={handleInputChange} />
-        <Button variant="primary" type="submit" disabled={loading}>
-          Enviar
-        </Button>
+          <Form.Control
+            className="mb-1"
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={handleInputChange} />
+          <Button variant="primary" type="submit" disabled={loading}>
+            Enviar
+          </Button>
 
 
-      </Form>
+        </Form>
 
-      <Container className="auth__social-networks d-flex">
-        <Button
-          variant="primary" className="google-btn"
-          onClick={handleLoginGoogle}>
-          <div className="google-icon-wrapper d-flex align-items-center justify-content-center">
-            <img className="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-              alt="google button" />
+        <div className="auth">
+          <Button
+            variant="primary" className="google-btn"
+            onClick={handleLoginGoogle}>
+            <div className="google-icon-wrapper d-flex align-items-center justify-content-center">
+              <img className="google-icon"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                alt="google button" />
 
-            <p className="btn-text m-1">
-              <b>Sign in with google</b>
-            </p>
-          </div>
-        </Button>
+              <p className="btn-text m-1">
+                <b>Sign in with google</b>
+              </p>
+            </div>
+          </Button>
 
-        <Button
-          variant="primary" className="google-btn"
-          onClick={handleLoginGoogle}>
-          <div className="google-icon-wrapper d-flex align-items-center justify-content-center">
-            <img className="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/9/91/036-facebook.png"
-              alt="google button"
-              width="30px" />
+          <Button
+            variant="primary" className="google-btn"
+            onClick={handleLoginGoogle}>
+            <div className="google-icon-wrapper d-flex align-items-center justify-content-center">
+              <img className="google-icon"
+                src="https://upload.wikimedia.org/wikipedia/commons/9/91/036-facebook.png"
+                alt="google button"
+                width="30px" />
 
-            <p className="btn-text m-1">
-              <b>Sign in with Facebook</b>
-            </p>
-          </div>
-        </Button>
-      </Container>
+              <p className="btn-text m-1">
+                <b>Sign in with Facebook</b>
+              </p>
+            </div>
+          </Button>
+        </div>
 
-      <Link to="/auth/register">Registrate</Link>
+        <Link className="redirect" to="/auth/register">Registrate</Link>
+      </div>
     </div>
-
   )
 }
 

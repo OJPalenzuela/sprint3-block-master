@@ -1,19 +1,32 @@
-#formBasicName{
-    width: 20vw;
+.superRegister{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
- 
-#formBasicEmail{
-    width: 20vw;
+
+.register-div{
+    background-color: rgb(240, 240, 240);
+    width: 80%;
+    max-width: 800px;
+    padding: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
- 
-#formBasicPassword{
-    width: 20vw;
+
+.form-register{
+    margin: 0px;
+    width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
- 
-#formBasicRepitPassword{
-    width: 20vw;
-}
- 
-Form{
-   margin-left: 40%;
+
+.redirect{
+    margin: 20px;
 }

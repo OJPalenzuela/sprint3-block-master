@@ -55,7 +55,8 @@ const Register = () => {
     }
 
     return (
-        <div className="py-5 container text-center w-50">
+        <div className="superRegister">
+            <div className="register-div">
             {
                 msjError &&
                 (
@@ -64,7 +65,7 @@ const Register = () => {
                     </div>
                 )
             }
-            <Form onSubmit={handleRegister} className="d-flex flex-column m-0">
+            <Form onSubmit={handleRegister} className="form-register">
                 <h1 className="h3 mb-3 font-weight-normal">
                     ¡Registrate en nuestro sistema!
                 </h1>
@@ -105,11 +106,13 @@ const Register = () => {
                     Registrarse
                 </Button>
 
-                <Link to="/auth/login">Registrate</Link>
+                <Link className="redirect" to="/auth/login">Iniciar sesión</Link>
 
             </Form>
 
         </div>
+        </div>
+        
     )
 }
 
