@@ -4,7 +4,6 @@ import "../../style/styleSection.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { findMovies, searchBy } from "../../actions/moviesActions";
-import { useDelete } from "../../hooks/useDelete";
 import found from "../../assets/svg/not-found.svg"
 import { ListarMovies } from "../../actions/cardActions";
 import CarauselElement from "./CarauselElement";
@@ -19,7 +18,6 @@ const Section = () => {
   const [movies, setMovies] = useState([]);
   const [initial, setInitial] = useState(true)
   const [pages] = useState(1)
-  const [deletes] = useDelete();
   const moviesResult = useSelector((store) => store.movies.results);
   const moviesName = useSelector((store) => store.movies.name);
   const moviesTitle = useSelector((store) => store.movies.title);
@@ -68,9 +66,6 @@ const Section = () => {
           (
           movies?.map(
             (data, key) =>
-              deletes.includes(data.id) ?
-                (<div style={{ display: "none" }} key={key}></div>)
-                :
                 (<MovieCard
                   key={data.id}
                   data={data}
