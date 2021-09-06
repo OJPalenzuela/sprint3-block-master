@@ -4,6 +4,11 @@ import { Carousel } from 'react-bootstrap'
 import { carauselElements } from '../../addons/carauselElements'
 
 const CarauselElement = () => {
+
+    const handleTrailer = (url) =>{
+      window.open(url, '_blank')
+    }
+
     return (
     
         <Carousel>
@@ -21,9 +26,9 @@ const CarauselElement = () => {
                         <i className="fas fa-play"></i>
                         <p>VER AHORA</p>
                       </button>
-                      <button type="button" className="btn btn-after">
+                      <button onClick={() => {handleTrailer(data.url)}} type="button" className="btn btn-after">
                         <i className="fas fa-plus"></i>
-                        <p>VER DESPUÉS</p>
+                        <p>VER TRAILER</p>
                       </button>
                     </div>
                     </Carousel.Caption>
