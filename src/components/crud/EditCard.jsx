@@ -61,7 +61,7 @@ const EditCard = () => {
     return (
         <div className="edit-container">
             <div className="edit">
-                <h2>Agregar nueva tarea</h2>
+                <h2>Agregar nueva Película</h2>
 
                 <form className="form" onSubmit={formik.handleSubmit}>
                     <div className="form-group">
